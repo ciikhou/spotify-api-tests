@@ -1,28 +1,21 @@
 package com.esens.automation.api.spotify;
-import org.openqa.selenium.By;
-import org.openqa.selenium.chrome.*;
-import java.io.IOException;
-import io.restassured.specification.*;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import org.junit.Assert;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
-import org.json.JSONObject;
+class SpotifyApiTests extends SpotifyApiSpec{
 
-class SpotifyApiTest extends SpotifyApiSpec{
-
+    @Test
     public void getAlbumById(String albumID){
-        sendRequest("GET",GET_ALBUM_ENDPOINT(albumID),null,400);
+        sendRequest("GET",GET_ALBUM_ENDPOINT(albumID),null,200);
     }
 
     public void getPlaylistById_FailTest(String PlaylistID){
-        sendRequest("GET",GET_PLAYLIST_ENDPOINT(PlaylistID),null,400);
+        sendRequest("GET",GET_PLAYLIST_ENDPOINT(PlaylistID),null,404);
     }
 
     public void getPlaylistTracksById(String PlaylistID){
         sendRequest("GET",GET_PLAYLIST_TRACKS_ENDPOINT(PlaylistID),null,200);
-
     }
 
     public void getPlaylistById(String PlaylistID){

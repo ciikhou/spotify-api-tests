@@ -55,8 +55,9 @@ public class SpotifyApiSpec extends TestsDatas {
         if (Type == "GET"){
             Response response = request.get(urlEndpoint);
             int statusCode = response.getStatusCode();
-            Assert.assertEquals(statusCode, 200);
-            if (statusCode == 200) System.out.println(ANSI_GREEN + "GET Request return code 200" + ANSI_RESET);
+            Assert.assertEquals(statusCode, expectedReturnCode);
+            if (statusCode == expectedReturnCode) System.out.println(ANSI_GREEN + "GET Request return code " + expectedReturnCode + ANSI_RESET);
+            else System.out.println(ANSI_RED + "GET Request return code " + expectedReturnCode + ANSI_RESET);
         } else {
 
 
