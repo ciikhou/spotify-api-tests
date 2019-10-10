@@ -5,25 +5,61 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.io.File;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class SpotifyApiSpec extends TestsDatas {
-    private String getAccessToken() {
-        ChromeDriver chromeDriver = getChromeDriver();
-        chromeDriver.get("https://accounts.spotify.com/authorize?client_id=" + clientID +"&response_type=token&redirect_uri=http://www.example.com/postman/redirect&state=123&scope=playlist-modify&show_dialog=false");
-        chromeDriver.findElement(By.id("login-username")).sendKeys(loginUserName);
-        chromeDriver.findElement(By.id("login-password")).sendKeys(loginPassword);
-        chromeDriver.findElement(By.id("login-button")).click();
-        try {Thread.sleep(3000);} catch(InterruptedException e){System.out.println("Tiemout error !");}
-        String myACtualURL = chromeDriver.executeScript("return window.location.href").toString();
-        String myAccessToken = myACtualURL.split("access_token=")[1].split("&token_type")[0];
-        chromeDriver.close();
-        return myAccessToken;
+
+    String accessToken = getAccessToken();
+
+    public void getAlbumById(String albumID){
+        sendRequest("GET",GET_ALBUM_ENDPOINT(albumID),null);
     }
 
-    private String getChromeDriverFilePath() {
+    public void getPlaylistTracksById(String PlaylistID){
+        sendRequest("GET",GET_PLAYLIST_TRACKS_ENDPOINT(PlaylistID),null);
+    }
+
+    public void getTrackById(String TrackID){
+        sendRequest("GET",GET_TRACK_ENDPOINT(TrackID),null);
+    }
+
+    public void getArtistById(String arstistID){
+        sendRequest("GET",GET_ARTIST_ENDPOINT(artistID),null);
+    }
+
+    public void getMyCurrentUsersPlaylisst(){
+        sendRequest("GET",GET_LIST_OF_CURENT_USER_PLAYLIST_ENDPOINT(),null);
+    }
+
+    public void ChangePlaylistDetails(String PlaylistId, String POST_PARAMETERS){
+        sendRequest("PUT",CHANGE_TO_PLAYLIST_DETAILS_ENDPOINT(PlaylistId),POST_PARAMETERS);
+    }
+
+    public void AddTracksToPlaylist(String PlaylistID, String Uris){
+        sendRequest("POST",ADD_TRACKS_TO_PLAYLIST_ENDPOINT(PlaylistID),Uris);
+    }
+
+    public void CreatePlaylist(String POST_PARAMETERS){
+        sendRequest("POST",CREATE_PLAYLIST_ENDPOINT(),POST_PARAMETERS);
+    }
+
+    public String getAccessToken() {
+        try {
+            Scanner scanner = new Scanner( new File("temp/authorization/current_access_token.txt"), "UTF-8");
+            String text = scanner.useDelimiter("\\A").next();
+            return text;
+        } catch (FileNotFoundException e){
+            e.getMessage();
+            e.printStackTrace();
+            }
+            return "OOooOO";
+    }
+
+    public String getChromeDriverFilePath() {
         String pathPrefixe = "src/test/resources/bin/";
         if (System.getProperty("os.name").startsWith("Windows"))
             return pathPrefixe + "chromedriver.exe";
@@ -31,66 +67,62 @@ public class SpotifyApiSpec extends TestsDatas {
             return pathPrefixe + "chromedriver";
     }
 
-    private ChromeOptions getChromeOptions() {
+
+    public ChromeOptions getChromeOptions() {
         System.setProperty("webdriver.chrome.driver",getChromeDriverFilePath());
         ChromeOptions chromeOptions= new ChromeOptions();
-        chromeOptions.setHeadless(true);
+        chromeOptions.setHeadless(false);
         chromeOptions.setCapability("chrome.switches","--incognito");
         chromeOptions.addArguments("--kiosk");
         return chromeOptions;
     }
 
-    private ChromeDriver getChromeDriver() {
-        return new ChromeDriver(this.getChromeOptions());
+    public void checkAccessToken() {
+        try {
+            Assert.assertNotNull(accessToken);
+            System.out.println(ANSI_GREEN + "\n Access-Token was find by retrieving the get parameter 'access_token' from the url (Selenium)" + ANSI_RESET);
+        } catch (AssertionError error){
+            System.out.println(ANSI_RED + error.getMessage() + ANSI_RESET);
+        }
     }
 
-    private final String accessToken = getAccessToken();
-
-    public void sendRequest(String Type, String urlEndpoint, String PostOrPutParameters,int expectedReturnCode) {
+    public Response sendRequest(String Type, String urlEndpoint, String PostOrPutParameters) {
         System.out.println(Type + " REQUEST :" + PREFIXE_URL + urlEndpoint );
         RestAssured.baseURI = PREFIXE_URL;
         RequestSpecification request = RestAssured.given();
         request.header("User-Agent", USER_AGENT);
         request.header("Authorization", "Bearer "+ accessToken);
         if (Type == "GET"){
-            Response response = request.get(urlEndpoint);
-            int statusCode = response.getStatusCode();
-            Assert.assertEquals(statusCode, expectedReturnCode);
-            if (statusCode == expectedReturnCode) System.out.println(ANSI_GREEN + "GET Request return code " + expectedReturnCode + ANSI_RESET);
-            else System.out.println(ANSI_RED + "GET Request return code " + expectedReturnCode + ANSI_RESET);
+            try {
+                Response response = request.get(urlEndpoint);
+                return response;
+            } catch(Exception e){
+                System.out.println(ANSI_RED + e.getMessage() + ANSI_RESET);
+            }
         } else {
-
-
             JSONObject requestParams = new JSONObject();
             String[] couple = PostOrPutParameters.split("&");
             for( String keyAndValue : couple) {
                 requestParams.put(keyAndValue.split("=")[0],keyAndValue.split("=")[1]);
             }
-
             request.body(requestParams.toString());
             if (Type == "POST"){
                 try {
                     Response response = request.post( urlEndpoint + "?" + PostOrPutParameters);
-                    int statusCode = response.getStatusCode();
-                    Assert.assertEquals(statusCode, expectedReturnCode);
-                    if (statusCode == expectedReturnCode) System.out.println(ANSI_GREEN + "POST Request return code " + expectedReturnCode + ANSI_RESET);
+                    return response;
                 } catch(Exception e){
-                    e.getMessage();
+                    System.out.println(ANSI_RED + e.getMessage() + ANSI_RESET);
                 }
             }
-
             if (Type == "PUT"){
                 try {
                     Response response = request.put( urlEndpoint + "?" + PostOrPutParameters);
-                    int statusCode = response.getStatusCode();
-                    Assert.assertEquals(statusCode, expectedReturnCode);
-                    if (statusCode == expectedReturnCode) System.out.println(ANSI_GREEN + "POST Request return code " + expectedReturnCode + ANSI_RESET);
+                    return response;
                 } catch(Exception e){
-                    e.getMessage();
+                    System.out.println(ANSI_RED + e.getMessage() + ANSI_RESET);
                 }
             }
         }
-
+        return null;
     }
-
 }

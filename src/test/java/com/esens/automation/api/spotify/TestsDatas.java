@@ -1,8 +1,9 @@
 package com.esens.automation.api.spotify;
 
 class TestsDatas{
-    static final String ANSI_RESET = "\u001B[0m";
-    static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
 
     static final String USER_AGENT = "Mozilla/5.0";
     static final String PREFIXE_URL = "https://api.spotify.com/v1/";
@@ -20,22 +21,22 @@ class TestsDatas{
     public String ADD_TRACKS_TO_PLAYLIST_ENDPOINT(String ID) {return  "playlists/" + ID +"/tracks";}
     public String CHANGE_TO_PLAYLIST_DETAILS_ENDPOINT(String ID) {return  "playlists/" + ID ;}
 
-    String clientID = "14ad74980cc24ecb9aff88ded35986e8";
+    public String clientID = "14ad74980cc24ecb9aff88ded35986e8";
 
-    String loginUserName = "esensqatraining@yopmail.com";
-    String loginPassword = "Passwd1!";
+    public String loginUserName = "esensqatraining@yopmail.com";
+    public String loginPassword = "Passwd1!";
 
-    String userID = "2g5o4vq6ayxp9eo5xlqw6os2k";
+    public String userID = "2g5o4vq6ayxp9eo5xlqw6os2k";
 
-    String trackID = "0Q0IVlqMV64kNLlwjPj0Hl";
-    String artistID = "2WKdxPFRD7IqZvlIAvhMgY";
-    String albumID = "18XFe4CPBgVezXkxZP6rTb";
+    public String trackID = "0Q0IVlqMV64kNLlwjPj0Hl";
+    public String artistID = "2WKdxPFRD7IqZvlIAvhMgY";
+    public String albumID = "18XFe4CPBgVezXkxZP6rTb";
 
-    String myPlaylistID = "1cZirM1Yv7bcx9nj2ZDNOo";
+    public String myPlaylistID = "1cZirM1Yv7bcx9nj2ZDNOo";
 
-    String fakePlaylistID = "FAKEID666";
+    public String newPlaylistName = "NewPlaylistCucumber";
 
-    String newNameForChangePlaylistDetail = "name=Playlist for test - OOoooOO";
+    public String newNameForChangePlaylistDetail = "name=Playlist for test - OOoooOO";
 
-    String tracksUris = "uris=spotify:track:0Q0IVlqMV64kNLlwjPj0Hl,spotify:track:7eJdx83TiKsVqAzLFBelMO";
+    public String tracksUris = "uris=spotify:track:0Q0IVlqMV64kNLlwjPj0Hl,spotify:track:7eJdx83TiKsVqAzLFBelMO";
 }
