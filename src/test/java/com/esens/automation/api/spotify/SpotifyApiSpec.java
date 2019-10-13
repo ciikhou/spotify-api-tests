@@ -47,6 +47,8 @@ public class SpotifyApiSpec extends TestsDatas {
         chromeOptions.setHeadless(true);
         chromeOptions.setCapability("chrome.switches","--incognito");
         chromeOptions.addArguments("--kiosk");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-dev-shm-usage");
         return chromeOptions;
     }
 
