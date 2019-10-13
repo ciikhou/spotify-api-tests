@@ -9,4 +9,4 @@ jobs:
     name: Maven Deploy
     script: mvn deploy
 
-script: mvn surefire:test
+script: mvn surefire:test -X
