@@ -1,8 +1,5 @@
 language: java
 
-addons:
-  chrome: stable
-
 cache:
   directories:
   - "$HOME/.m2"
