@@ -7,10 +7,4 @@ Feature: Create Playlist
     Then My request Create Playlist should return code 201
 
 
-    Scenario: Create PlaylddddistR
-    Given I have a valid 'Access Token' for running tests
-    Then My request Create Playlist should return code 201
-
-
-
 
