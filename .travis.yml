@@ -1,12 +1,5 @@
 language: java
 
-cache:
-  directories:
-  - ~/.m2
-
-jobs:
-  - stage: deploy
-    name: Maven Deploy
-    script: mvn deploy
-
-script: mvn surefire:test -X
+script:
+  - mvn clean
+  - mvn surefire:test -X
