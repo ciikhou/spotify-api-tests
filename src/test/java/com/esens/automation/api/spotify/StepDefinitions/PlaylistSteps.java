@@ -40,7 +40,7 @@ public class PlaylistSteps extends SpotifyApiSpec {
     }
 
 
-    
+
 
     // Creation
     @And("Execute My Request : Create playlist")
