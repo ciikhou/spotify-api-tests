@@ -12,4 +12,4 @@ branches:
   only:
   - master
 before_script:
-  -     - sudo chmod 777 /home/travis/build/ciikhou/spotify-api-tests/src/test/resources/bin/chromedriver
+  - sudo chmod 777 /home/travis/build/ciikhou/spotify-api-tests/src/test/resources/bin/chromedriver
