@@ -44,7 +44,7 @@ public class SpotifyApiSpec extends TestsDatas {
     public ChromeOptions getChromeOptions() {
         System.setProperty("webdriver.chrome.driver",getChromeDriverFilePath());
         ChromeOptions chromeOptions= new ChromeOptions();
-        chromeOptions.setHeadless(false);
+        chromeOptions.setHeadless(true);
         chromeOptions.setCapability("chrome.switches","--incognito");
         chromeOptions.addArguments("--kiosk");
         return chromeOptions;
