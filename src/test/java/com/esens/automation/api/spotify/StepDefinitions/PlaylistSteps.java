@@ -1,12 +1,10 @@
 package com.esens.automation.api.spotify.StepDefinitions;
 
 import com.esens.automation.api.spotify.SpotifyApiSpec;
-import cucumber.api.PendingException;
+import com.esens.automation.api.spotify.TestDatas.Endpoint;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import io.restassured.response.Response;
-import org.junit.Test;
 import org.junit.Assert;
 
 
@@ -16,11 +14,11 @@ public class PlaylistSteps extends SpotifyApiSpec {
 
     @And("Execute My Request : Get a playlist by id")
     public void get_playlist_by_id(){
-       this.myRequestResponse = sendRequest("GET",GET_PLAYLIST_ENDPOINT(myPlaylistID),null);
+       this.myRequestResponse = sendRequest("GET",Endpoint.GET_PLAYLIST(myPlaylistID),null);
     }
     @And("Execute My Request : Add Track To Playlist")
     public void add_track_to_playlist_by_id(){
-        this.myRequestResponse = sendRequest("POST",ADD_TRACKS_TO_PLAYLIST_ENDPOINT(myPlaylistID),tracksUris);
+        this.myRequestResponse = sendRequest("POST",Endpoint.ADD_TRACKS_TO_PLAYLIST(myPlaylistID),tracksUris);
     }
 
     @Then("My request GET Playlist should return code (.*)")
@@ -44,7 +42,7 @@ public class PlaylistSteps extends SpotifyApiSpec {
     // Creation
     @And("Execute My Request : Create playlist")
     public void create_playlist(){
-        myRequestResponse = sendRequest("POST",CREATE_PLAYLIST_ENDPOINT(),"name=oooooooooo&description=hh" );
+        myRequestResponse = sendRequest("POST",Endpoint.CREATE_PLAYLIST(userID),"name=oooooooooo&description=hh" );
     }
 
     @Then("My request Create Playlist should return code (.*)")
@@ -57,7 +55,7 @@ public class PlaylistSteps extends SpotifyApiSpec {
 
     @And("Execute My Request : Get a playlist by a not valide id")
     public void get_playlist_by_a_not_valide_id(){
-        myRequestResponse = sendRequest("GET",GET_PLAYLIST_ENDPOINT("badIdForFailTest"),null);
+        myRequestResponse = sendRequest("GET",Endpoint.GET_PLAYLIST("badIdForFailTest"),null);
     }
 
 

@@ -3,9 +3,6 @@ package com.esens.automation.api.spotify;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
-import org.junit.runner.Result;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.notification.Failure;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -16,7 +13,8 @@ import org.junit.runner.notification.Failure;
                     "src/test/resources/com/esens/automation/api/spotify/Feature/GetArtist.feature",
                     "src/test/resources/com/esens/automation/api/spotify/Feature/GetAlbum.feature",
                     "src/test/resources/com/esens/automation/api/spotify/Feature/GetTrack.feature"},
-        plugin = {"pretty"}
+        plugin = { "pretty", "html:target/" },
+        monochrome = true
 )
 public class RunCucumberTest {
 }

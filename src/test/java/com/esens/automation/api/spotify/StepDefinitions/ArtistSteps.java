@@ -1,11 +1,11 @@
 package com.esens.automation.api.spotify.StepDefinitions;
 
 import com.esens.automation.api.spotify.SpotifyApiSpec;
+import com.esens.automation.api.spotify.TestDatas.Endpoint;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import io.restassured.response.Response;
 import org.junit.Assert;
-
 
 public class ArtistSteps extends SpotifyApiSpec {
 
@@ -13,7 +13,7 @@ public class ArtistSteps extends SpotifyApiSpec {
 
     @And("Execute My Request : Get a Artist by id")
     public void get_artist_by_id(){
-       this.myRequestResponse = sendRequest("GET",GET_ARTIST_ENDPOINT(artistID),null);
+       this.myRequestResponse = sendRequest("GET", Endpoint.GET_ARTIST(artistID),null);
     }
 
     @Then("My request GET Artist should return code (.*)")
@@ -37,7 +37,7 @@ public class ArtistSteps extends SpotifyApiSpec {
     // Get Artist FailTest
     @And("Execute My Request : Get a Artist by a not valide id")
     public void get_artist_by_a_not_valide_id(){
-        myRequestResponse = sendRequest("GET",GET_ARTIST_ENDPOINT("BadIdForFailTest"),null);
+        myRequestResponse = sendRequest("GET",Endpoint.GET_ARTIST("BadIdForFailTest"),null);
     }
 
 
