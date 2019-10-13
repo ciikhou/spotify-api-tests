@@ -7,10 +7,7 @@ install: true
 jdk: openjdk8
 
 script:
-  - mvn install
-  - mvn compile
   - mvn surefire:test
-
 branches:
     only:
     - master

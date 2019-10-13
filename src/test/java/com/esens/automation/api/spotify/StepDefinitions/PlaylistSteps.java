@@ -39,9 +39,6 @@ public class PlaylistSteps extends SpotifyApiSpec {
         System.out.println( ANSI_GREEN + "My respnse body contain 'display_name': 'QA Training'" + ANSI_RESET);
     }
 
-
-
-
     // Creation
     @And("Execute My Request : Create playlist")
     public void create_playlist(){
