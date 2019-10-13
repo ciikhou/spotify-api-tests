@@ -5,10 +5,8 @@ cache:
   - ~/.m2
 
 jobs:
-  - stage: test
-    name: Run All tests
-    script: mvn surefire:test
-
   - stage: deploy
     name: Maven Deploy
     script: mvn deploy
+
+script: mvn surefire:test
