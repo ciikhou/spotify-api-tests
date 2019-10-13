@@ -21,8 +21,19 @@ public class PlaylistSteps extends SpotifyApiSpec {
         this.myRequestResponse = sendRequest("POST",Endpoint.ADD_TRACKS_TO_PLAYLIST(myPlaylistID),tracksUris);
     }
 
+    @And("Execute My Request : Get Playlist Tracks")
+    public void get_playlit_tracks(){
+        this.myRequestResponse = sendRequest("GET",Endpoint.GET_PLAYLIST_TRACKS(myPlaylistID),null);
+    }
+
     @Then("My request GET Playlist should return code (.*)")
     public void my_request_get_playlist_should_retrun_expected_code(int int1) {
+        Assert.assertEquals(myRequestResponse.getStatusCode(),int1);
+        System.out.println( ANSI_GREEN + "The excpected code is good => " + int1 + ANSI_RESET);
+    }
+
+    @Then("My request GET Playlist Tracks should return code (.*)")
+    public void my_request_get_playlist_tracks_should_retrun_expected_code(int int1) {
         Assert.assertEquals(myRequestResponse.getStatusCode(),int1);
         System.out.println( ANSI_GREEN + "The excpected code is good => " + int1 + ANSI_RESET);
     }
@@ -33,8 +44,13 @@ public class PlaylistSteps extends SpotifyApiSpec {
         System.out.println( ANSI_GREEN + "The excpected code is good => " + int1 + ANSI_RESET);
     }
 
+    @And("My GET Playlist Tracks Response Body Should Contains (.*)")
+    public void my_getplaylist_tracks_respone_should_contain(String arg1){
+        Assert.assertEquals(myRequestResponse.getBody().print().contains(arg1),true);
+        System.out.println( ANSI_GREEN + "My respnse body contain 'display_name': 'QA Training'" + ANSI_RESET);
+    }
     @And("My GET Playlist Response Body Should Contains (.*)")
-    public void verify_my_body_content(String arg1){
+    public void my_getplaylist_respone_should_contain(String arg1){
         Assert.assertEquals(myRequestResponse.getBody().print().contains(arg1),true);
         System.out.println( ANSI_GREEN + "My respnse body contain 'display_name': 'QA Training'" + ANSI_RESET);
     }
