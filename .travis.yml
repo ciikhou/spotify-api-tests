@@ -11,6 +11,6 @@ script:
   - mvn compile
   - mvn surefire:test
 
-  branches:
+branches:
     only:
     - master
