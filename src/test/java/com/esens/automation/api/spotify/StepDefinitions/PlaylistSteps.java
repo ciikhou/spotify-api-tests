@@ -74,8 +74,9 @@ public class PlaylistSteps extends SpotifyApiSpec {
         myRequestResponse = sendRequest("GET",Endpoint.GET_PLAYLIST("badIdForFailTest"),null);
     }
 
-    @And("ooo")
-    public void ooo(){
+    @And("EPPP")
+    public void ttPPt(){
+        myRequestResponse = sendRequest("GET",Endpoint.GET_PLAYLIST("badIdForFailTest"),null);
         myRequestResponse = sendRequest("GET",Endpoint.GET_PLAYLIST("badIdForFailTest"),null);
     }
 
