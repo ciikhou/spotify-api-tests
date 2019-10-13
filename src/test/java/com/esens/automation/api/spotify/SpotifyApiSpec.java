@@ -45,11 +45,11 @@ public class SpotifyApiSpec extends TestsDatas {
         System.setProperty("webdriver.chrome.driver",getChromeDriverFilePath());
         ChromeOptions chromeOptions= new ChromeOptions();
         chromeOptions.setHeadless(true);
-        chromeOptions.setCapability("chrome.switches","--incognito");
         chromeOptions.addArguments("--kiosk");
         chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--test-type");
+        chromeOptions.addArguments("--disable-extensions");
         chromeOptions.addArguments("--disable-dev-shm-usage");
-        chromeOptions.addArguments("--disable-gpu");
         return chromeOptions;
     }
 
