@@ -1,10 +1,7 @@
 package com.esens.automation.api.spotify.StepDefinitions;
 
 import com.esens.automation.api.spotify.SpotifyApiSpec;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import io.restassured.response.Response;
-
 
 public class _CommonSteps extends SpotifyApiSpec {
 

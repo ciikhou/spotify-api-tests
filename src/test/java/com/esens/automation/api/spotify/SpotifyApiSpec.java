@@ -1,5 +1,6 @@
 package com.esens.automation.api.spotify;
 
+import com.esens.automation.api.spotify.TestDatas.TestsDatas;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -11,41 +12,13 @@ import java.util.Scanner;
 import java.io.File;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+
 public class SpotifyApiSpec extends TestsDatas {
 
-    String accessToken = getAccessToken();
-
-    public void getAlbumById(String albumID){
-        sendRequest("GET",GET_ALBUM_ENDPOINT(albumID),null);
-    }
-
-    public void getPlaylistTracksById(String PlaylistID){
-        sendRequest("GET",GET_PLAYLIST_TRACKS_ENDPOINT(PlaylistID),null);
-    }
-
-    public void getTrackById(String TrackID){
-        sendRequest("GET",GET_TRACK_ENDPOINT(TrackID),null);
-    }
-
-    public void getArtistById(String arstistID){
-        sendRequest("GET",GET_ARTIST_ENDPOINT(artistID),null);
-    }
-
-    public void getMyCurrentUsersPlaylisst(){
-        sendRequest("GET",GET_LIST_OF_CURENT_USER_PLAYLIST_ENDPOINT(),null);
-    }
-
-    public void ChangePlaylistDetails(String PlaylistId, String POST_PARAMETERS){
-        sendRequest("PUT",CHANGE_TO_PLAYLIST_DETAILS_ENDPOINT(PlaylistId),POST_PARAMETERS);
-    }
-
-    public void AddTracksToPlaylist(String PlaylistID, String Uris){
-        sendRequest("POST",ADD_TRACKS_TO_PLAYLIST_ENDPOINT(PlaylistID),Uris);
-    }
-
-    public void CreatePlaylist(String POST_PARAMETERS){
-        sendRequest("POST",CREATE_PLAYLIST_ENDPOINT(),POST_PARAMETERS);
-    }
+    public String accessToken = getAccessToken();
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
 
     public String getAccessToken() {
         try {

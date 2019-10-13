@@ -20,7 +20,6 @@ public class AuthorizationSteps extends SpotifyApiSpec {
     private ChromeOptions chromeOptions;
     private ChromeDriver chromeDriver;
 
-
     @Given("I Set ChromeDriver Options")
     public void set_chromeDriver_options(){
         this.chromeOptions = getChromeOptions();

@@ -1,6 +1,7 @@
 package com.esens.automation.api.spotify.StepDefinitions;
 
 import com.esens.automation.api.spotify.SpotifyApiSpec;
+import com.esens.automation.api.spotify.TestDatas.Endpoint;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import io.restassured.response.Response;
@@ -13,7 +14,7 @@ public class TrackSteps extends SpotifyApiSpec {
 
     @And("Execute My Request : Get a Track by id")
     public void get_track_by_id(){
-       this.myRequestResponse = sendRequest("GET",GET_TRACK_ENDPOINT(trackID),null);
+       this.myRequestResponse = sendRequest("GET",Endpoint.GET_TRACK(trackID),null);
     }
 
     @Then("My request GET Track should return code (.*)")
@@ -37,7 +38,7 @@ public class TrackSteps extends SpotifyApiSpec {
     // Get Track FailTest
     @And("Execute My Request : Get a Track by a not valide id")
     public void get_track_by_a_not_valide_id(){
-        myRequestResponse = sendRequest("GET",GET_TRACK_ENDPOINT("BadIdForFailTest"),null);
+        myRequestResponse = sendRequest("GET", Endpoint.GET_TRACK("BadIdForFailTest"),null);
     }
 
 
