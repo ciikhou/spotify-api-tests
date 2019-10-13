@@ -49,6 +49,7 @@ public class SpotifyApiSpec extends TestsDatas {
         chromeOptions.addArguments("--kiosk");
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--disable-dev-shm-usage");
+        chromeOptions.addArguments("--disable-gpu");
         return chromeOptions;
     }
 
