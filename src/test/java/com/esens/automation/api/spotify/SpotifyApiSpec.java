@@ -49,6 +49,8 @@ public class SpotifyApiSpec extends TestsDatas {
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--test-type");
         chromeOptions.addArguments("--disable-extensions");
+        chromeOptions.addArguments("--disable-gpu");
+        chromeOptions.setExperimentalOption("useAutomationExtension",false);
         chromeOptions.addArguments("--disable-dev-shm-usage");
         return chromeOptions;
     }
