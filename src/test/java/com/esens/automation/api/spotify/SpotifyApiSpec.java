@@ -44,7 +44,6 @@ public class SpotifyApiSpec extends TestsDatas {
     public ChromeOptions getChromeOptions() {
         System.setProperty("webdriver.chrome.driver",getChromeDriverFilePath());
         ChromeOptions chromeOptions= new ChromeOptions();
-        chromeOptions.setHeadless(true);
         chromeOptions.addArguments("--kiosk");
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--test-type");
