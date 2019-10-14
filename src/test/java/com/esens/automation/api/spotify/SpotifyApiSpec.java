@@ -44,13 +44,18 @@ public class SpotifyApiSpec extends TestsDatas {
     public ChromeOptions getChromeOptions() {
         System.setProperty("webdriver.chrome.driver",getChromeDriverFilePath());
         ChromeOptions chromeOptions= new ChromeOptions();
-        chromeOptions.addArguments("--kiosk");
-        chromeOptions.addArguments("--no-sandbox");
-        chromeOptions.addArguments("--test-type");
-        chromeOptions.addArguments("--disable-extensions");
-        chromeOptions.addArguments("--disable-gpu");
-        chromeOptions.setExperimentalOption("useAutomationExtension",false);
+        chromeOptions.addArguments("--no-sandbox"); //Bypass OS security model
+        chromeOptions.addArguments("--disable-web-security");
+        chromeOptions.addArguments("--ignore-urlfetcher-cert-requests");
+        chromeOptions.addArguments("--disable-renderer-backgrounding");
+        chromeOptions.addArguments("--disable-infobars");
+        chromeOptions.addArguments("--start-maximized");
         chromeOptions.addArguments("--disable-dev-shm-usage");
+        chromeOptions.setExperimentalOption("useAutomationExtension", false);
+        chromeOptions.addArguments("--log-level=3"); // set log level
+        chromeOptions.addArguments("--silent");
+        chromeOptions.addArguments("--disable-gpu");
+        chromeOptions.addArguments("window-size=1920,1080");
         return chromeOptions;
     }
 
