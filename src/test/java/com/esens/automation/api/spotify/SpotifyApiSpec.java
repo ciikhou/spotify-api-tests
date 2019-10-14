@@ -44,6 +44,7 @@ public class SpotifyApiSpec extends TestsDatas {
     public ChromeOptions getChromeOptions() {
         System.setProperty("webdriver.chrome.driver",getChromeDriverFilePath());
         ChromeOptions chromeOptions= new ChromeOptions();
+        chromeOptions.setHeadless(true);
         chromeOptions.addArguments("--no-sandbox"); //Bypass OS security model
         chromeOptions.addArguments("--disable-web-security");
         chromeOptions.addArguments("--ignore-urlfetcher-cert-requests");

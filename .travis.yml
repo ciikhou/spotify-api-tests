@@ -2,21 +2,34 @@ language: java
 cache:
   directories:
   - "$HOME/.m2"
-
 install: true
 jdk: openjdk8
 
+addons:
+  chrome: stable
+
+services:
+- xvfb
+
 script:
 - mvn surefire:test
+
 branches:
   only:
   - master
+
 before_script:
   - sudo chmod 777 /home/travis/build/ciikhou/spotify-api-tests/src/test/resources/bin/chromedriver
   - "export DISPLAY=:99.0"
+
+after_script:
+  - mkdir -p history/$(date +%Y%m%d_%H%M)
+  - mv index.html history/$(date +%Y%m%d_%H%M)/index.html
+  - mv jquery-1.8.2.min.js history/$(date +%Y%m%d_%H%M)/jquery-1.8.2.min.jsmv report.js
+  - mv style.css history/$(date +%Y%m%d_%H%M)/style.css
+  - mv formatter.js history/$(date +%Y%m%d_%H%M)/formatter.js
+  - mv report.js allReports/history/$(date +%Y%m%d_%H%M)/report.js
+
 notifications:
-  email: false
-addons:
-  chrome: stable
-services:
-- xvfb
+  email: true
+
