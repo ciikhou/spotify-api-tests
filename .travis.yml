@@ -13,6 +13,13 @@ branches:
   - master
 before_script:
   - sudo chmod 777 /home/travis/build/ciikhou/spotify-api-tests/src/test/resources/bin/chromedriver
-  - "export DISPLAY=:99.0"
+  - Xvfb :99 -ac -screen 0 1280x1024x24
+  - export DISPLAY=:99.0
 notifications:
   email: false
+_browsers:
+  chrome: &chrome
+    addons:
+      apt:
+        packages:
+        - google-chrome-stable - google-chrome-stable
